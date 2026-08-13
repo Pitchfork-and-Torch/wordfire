@@ -1,0 +1,19 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Use npm 11 (matches packageManager / local lockfile)
+        run: npm install -g npm@11.16.0
+      - run: npm --version
+      - run: npm ci
+      - run: npm run typecheck
