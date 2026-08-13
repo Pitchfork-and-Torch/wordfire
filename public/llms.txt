@@ -1,0 +1,23 @@
+# Wordfire
+> Pass-and-play collaborative storytelling around a digital campfire. One contribution at a time.
+
+- Live: https://wordfire.jonbailey.xyz/
+- Original experimental host: https://wordfire.grok.me/
+- Source: https://github.com/Pitchfork-and-Torch/wordfire
+- License: see repository
+- Network: Pitchfork-and-Torch / jonbailey.xyz
+
+## One-liner
+One word (or phrase) at a time — local pass-and-play or remote WebRTC circles. Stories stay on-device unless you share them.
+
+## Modes
+- Pass-and-play on one device (offline-capable PWA)
+- Remote circle via room codes + peer-to-peer WebRTC
+- Local archive of finished stories
+
+## Privacy
+Guest-first. No account required for local play. Remote peers may learn each others' IPs during ICE (WebRTC).
+
+## Related
+- https://jonbailey.xyz/
+- https://x-ray.jonbailey.xyz/
