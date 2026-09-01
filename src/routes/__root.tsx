@@ -4,11 +4,14 @@ import { AccessibilityShell } from "@/components/accessibility-shell";
 import { AtmosphereShell } from "@/components/atmosphere/atmosphere-shell";
 import { InstallHint } from "@/components/pwa/install-hint";
 import { RegisterServiceWorker } from "@/components/pwa/register-sw";
+import { APP_VERSION } from "@/lib/version";
 import { Toaster } from "sonner";
 import appCss from "../styles.css?url";
 
 const SITE_URL = "https://wordfire.jonbailey.xyz";
-const OG_IMAGE = `${SITE_URL}/og.jpg?v=2.1.0`;
+const OG_IMAGE = `${SITE_URL}/og.jpg?v=${APP_VERSION}`;
+const META_DESCRIPTION =
+  "Peer-to-peer campfire storytelling. One word at a time. Pass-and-play on one device, or a remote WebRTC circle.";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -20,8 +23,7 @@ export const Route = createRootRoute({
       },
       {
         name: "description",
-        content:
-          "Wordfire - pass-and-play campfire storytelling. One word at a time. Local circle or remote WebRTC rooms (direct path, then a relay if a wall is in the way). Stories stay on-device.",
+        content: META_DESCRIPTION,
       },
       { title: "Wordfire — Campfire storytelling" },
       { name: "theme-color", content: "#0c0a09" },
@@ -36,8 +38,7 @@ export const Route = createRootRoute({
       { property: "og:title", content: "Wordfire — Campfire storytelling" },
       {
         property: "og:description",
-        content:
-          "Pass-and-play or remote circle. One contribution at a time. Stories stay on this device unless you share.",
+        content: META_DESCRIPTION,
       },
       { property: "og:image", content: OG_IMAGE },
       { property: "og:image:secure_url", content: OG_IMAGE },
@@ -46,7 +47,7 @@ export const Route = createRootRoute({
       { property: "og:image:height", content: "630" },
       {
         property: "og:image:alt",
-        content: "Wordfire — pass-and-play campfire storytelling",
+        content: "Wordfire — peer-to-peer campfire storytelling",
       },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@suddenlyjon" },
@@ -54,10 +55,10 @@ export const Route = createRootRoute({
       { name: "twitter:title", content: "Wordfire — Campfire storytelling" },
       {
         name: "twitter:description",
-        content: "One word at a time. Local or remote circles. On-device stories.",
+        content: META_DESCRIPTION,
       },
       { name: "twitter:image", content: OG_IMAGE },
-      { name: "twitter:image:alt", content: "Wordfire — campfire storytelling" },
+      { name: "twitter:image:alt", content: "Wordfire — peer-to-peer campfire storytelling" },
     ],
     links: [
       { rel: "canonical", href: `${SITE_URL}/` },

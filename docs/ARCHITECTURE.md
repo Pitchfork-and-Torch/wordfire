@@ -101,7 +101,7 @@ seedPrompt?, reactions[{wordId,emoji,by}], thinkingByPeerId
 - Default: Zustand persist in browser storage; stories never required on server.  
 - Signaling DB holds ephemeral room peers + SDP/ICE only (not story body).  
 - WebRTC may expose peer IPs via ICE (standard browser behavior). Documented in UI copy.  
-- Optional AI spark hits `/api/spark` only when user opts in.
+- Optional AI friends POST the story so far to `/api/spark` when they take a turn (adding an AI friend is the opt-in).
 
 ## Edge cases
 

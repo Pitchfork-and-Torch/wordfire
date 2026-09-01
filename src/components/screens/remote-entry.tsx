@@ -75,7 +75,9 @@ export function RemoteEntryScreen() {
       <div className="mb-6 rounded-[var(--radius-xl)] border border-border bg-bg-elevated p-4 text-sm leading-relaxed text-fg-muted">
         <p>
           Create a campfire, share the code or link, and take turns from your own phones.
-          Best for friends who choose to play together — connections are peer-to-peer.
+          Connections are peer-to-peer. This site only introduces the circle —
+          the story itself is not stored on the server. Peers may see each
+          other&apos;s IP addresses while the fire forms.
         </p>
       </div>
 

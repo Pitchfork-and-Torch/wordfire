@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { CampfireScene } from "@/components/atmosphere/campfire-scene";
 import { SoundToggle } from "@/components/atmosphere/sound-toggle";
 import { useGameStore } from "@/lib/game/store";
+import { APP_VERSION } from "@/lib/version";
 
 export function HomeScreen() {
   const archive = useGameStore((s) => s.archive);
@@ -37,13 +38,13 @@ export function HomeScreen() {
       <main className="relative z-10 mx-auto flex w-full max-w-lg flex-1 flex-col justify-end px-5 pb-10 pt-8 sm:justify-center sm:px-6">
         <div className="mb-8 flex flex-col items-center text-center sm:mb-10">
           <p className="mb-3 text-xs font-medium uppercase tracking-[0.22em] text-ember-glow/90">
-            Ember Circle · pass & play · P2P remote
+            Ember Circle · peer-to-peer · one word at a time
           </p>
           <h1 className="font-display text-4xl font-medium tracking-tight text-fg sm:text-5xl">
             Wordfire
           </h1>
           <p className="mt-4 max-w-sm text-base leading-relaxed text-fg-muted">
-            One word at a time. Grammar is implied - the story belongs to everyone
+            One word at a time. Grammar is implied — the story belongs to everyone
             in the circle.
           </p>
         </div>
@@ -96,6 +97,10 @@ export function HomeScreen() {
             Last local circle: {players.map((p) => p.name).join(", ")}
           </p>
         ) : null}
+        <p className="mt-8 text-center text-xs text-fg-subtle">
+          {APP_VERSION} · guest-first · stories stay in this browser unless you
+          share or add an AI friend
+        </p>
       </main>
     </div>
   );

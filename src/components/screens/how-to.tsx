@@ -13,7 +13,7 @@ const STEPS = [
   },
   {
     title: "Or gather remotely",
-    body: "Create a room, share the code or link. Friends join from their own devices. We try a direct path first, then a Cloudflare relay if a network wall is in the way. The host lights the fire when ready.",
+    body: "Create a room, share the code or link. Friends join from their own devices. Circles try a direct peer-to-peer path first; if the host has a relay configured, it can help when a network wall is in the way. The host lights the fire when ready.",
   },
   {
     title: "Speak one contribution",
@@ -60,8 +60,9 @@ export function HowToScreen() {
       <div className="mt-8 rounded-[var(--radius-lg)] border border-border bg-bg-elevated p-4">
         <h2 className="font-medium text-fg">The spirit</h2>
         <p className="mt-1 text-sm leading-relaxed text-fg-muted">
-          No scores. AI friends are collaborators, not opponents. Stories stay on
-          this device unless you share them.
+          No scores. AI friends are optional collaborators, not opponents.
+          Finished stories stay in this browser unless you share them. Adding an
+          AI friend sends the story so far to this app so they can take a turn.
         </p>
       </div>
 

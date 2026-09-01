@@ -3,6 +3,7 @@ import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { THEME_META, type AtmosphereTheme } from "@/lib/game/types";
 import { useGameStore } from "@/lib/game/store";
+import { APP_VERSION } from "@/lib/version";
 import { cn } from "@/lib/utils";
 
 const THEME_ORDER: AtmosphereTheme[] = ["night", "forest", "cabin", "space", "minimal"];
@@ -188,9 +189,13 @@ export function SettingsScreen() {
       </section>
 
       <p className="text-sm text-fg-subtle">
-        Stories stay on this device unless you share them. Install as an app for
-        offline pass-and-play.
+        Guest-first. Finished stories stay in this browser unless you export or
+        share them. Adding an AI friend sends the story so far to this app so
+        they can take a turn. Remote circles are peer-to-peer; peers may see
+        each other&apos;s IP addresses while the fire forms. Install as an app
+        for offline pass-and-play.
       </p>
+      <p className="mt-3 text-xs text-fg-subtle">Wordfire {APP_VERSION}</p>
     </div>
   );
 }

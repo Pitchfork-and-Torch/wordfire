@@ -1,7 +1,7 @@
 {
   "name": "Wordfire",
   "short_name": "Wordfire",
-  "description": "Pass-and-play campfire storytelling. One word at a time.",
+  "description": "Peer-to-peer campfire storytelling. One word at a time.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
