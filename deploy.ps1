@@ -3,19 +3,11 @@
 $ErrorActionPreference = "Stop"
 $Root = Split-Path -Parent $MyInvocation.MyCommand.Path
 $Project = "wordfire-jonbailey"
-$NeonSecret = Join-Path $env:USERPROFILE ".grok\secrets\neon-wordfire.env"
 
-# Load DATABASE_URL for build-time migrate (Pages runtime uses wrangler secret).
-if (-not $env:DATABASE_URL -and (Test-Path $NeonSecret)) {
-  Get-Content $NeonSecret | ForEach-Object {
-    if ($_ -match '^\s*#' -or $_ -match '^\s*$') { return }
-    if ($_ -match '^(DATABASE_URL)=(.*)$') {
-      $env:DATABASE_URL = $Matches[2].Trim().Trim('"').Trim("'")
-    }
-  }
-  if ($env:DATABASE_URL) {
-    Write-Host "[DEPLOY] DATABASE_URL loaded for migrations (from neon-wordfire.env)" -ForegroundColor DarkGray
-  }
+# Build-time migrate uses DATABASE_URL from the process environment.
+# Pages runtime uses the wrangler secret. Exit if unset.
+if ([string]::IsNullOrWhiteSpace($env:DATABASE_URL)) {
+  throw "DATABASE_URL is not set in the environment."
 }
 
 Push-Location $Root
