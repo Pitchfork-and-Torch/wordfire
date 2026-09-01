@@ -1,0 +1,242 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --color-bg: #0c0a09;
+  --color-bg-elevated: #141110;
+  --color-bg-subtle: #1c1816;
+  --color-bg-muted: #2a2320;
+  --color-fg: #f5f0eb;
+  --color-fg-muted: #a89f96;
+  --color-fg-subtle: #6f675f;
+  --color-border: #2e2824;
+  --color-border-strong: #3f3732;
+  --color-ember: #e07840;
+  --color-ember-soft: #c45a2a;
+  --color-ember-glow: #f0a060;
+  --color-ember-fg: #1a0f0a;
+  --color-success: #6b9b7a;
+  --color-danger: #c45c4a;
+
+  --font-display: "Fraunces", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-body: "Source Sans 3", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+
+  --shadow-glow: 0 0 40px color-mix(in oklab, var(--color-ember) 18%, transparent);
+  --shadow-card: 0 12px 40px color-mix(in oklab, #000 45%, transparent);
+}
+
+/* Atmospheric themes */
+html[data-theme="forest"] {
+  --color-bg: #0a100e;
+  --color-bg-elevated: #121a16;
+  --color-bg-subtle: #1a2420;
+  --color-bg-muted: #26332c;
+  --color-fg: #e8f0e6;
+  --color-fg-muted: #9aafa0;
+  --color-fg-subtle: #6a7f70;
+  --color-border: #243028;
+  --color-border-strong: #35483c;
+  --color-ember: #8aaa60;
+  --color-ember-soft: #6a9a58;
+  --color-ember-glow: #c8d878;
+  --color-ember-fg: #0c140c;
+}
+
+html[data-theme="cabin"] {
+  --color-bg: #120e0a;
+  --color-bg-elevated: #1c1610;
+  --color-bg-subtle: #261e16;
+  --color-bg-muted: #3a2e22;
+  --color-fg: #f8f0e4;
+  --color-fg-muted: #b8a890;
+  --color-fg-subtle: #7a6c58;
+  --color-border: #32281e;
+  --color-border-strong: #4a3c2c;
+  --color-ember: #d07840;
+  --color-ember-soft: #b05830;
+  --color-ember-glow: #f0b070;
+  --color-ember-fg: #1a1008;
+}
+
+html[data-theme="space"] {
+  --color-bg: #07080f;
+  --color-bg-elevated: #0e1018;
+  --color-bg-subtle: #161a28;
+  --color-bg-muted: #222838;
+  --color-fg: #e8ecf8;
+  --color-fg-muted: #9aa4c0;
+  --color-fg-subtle: #6a7490;
+  --color-border: #1e2438;
+  --color-border-strong: #303850;
+  --color-ember: #7090d8;
+  --color-ember-soft: #5068b8;
+  --color-ember-glow: #a8c0f0;
+  --color-ember-fg: #0a0c18;
+}
+
+html[data-theme="minimal"] {
+  --color-bg: #0b0b0c;
+  --color-bg-elevated: #141416;
+  --color-bg-subtle: #1c1c1e;
+  --color-bg-muted: #2a2a2e;
+  --color-fg: #f0f0f2;
+  --color-fg-muted: #a0a0a8;
+  --color-fg-subtle: #6e6e76;
+  --color-border: #28282c;
+  --color-border-strong: #3a3a40;
+  --color-ember: #d0d0d4;
+  --color-ember-soft: #a8a8b0;
+  --color-ember-glow: #ececf0;
+  --color-ember-fg: #121214;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  html.text-large {
+    font-size: 112.5%;
+  }
+
+  html.contrast-high {
+    --color-fg: #fffaf5;
+    --color-fg-muted: #d4cbc2;
+    --color-border: color-mix(in oklab, var(--color-fg) 22%, transparent);
+    --color-border-strong: color-mix(in oklab, var(--color-fg) 35%, transparent);
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 350ms cubic-bezier(0.22, 1, 0.36, 1),
+      color 350ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  :focus-visible {
+    outline: 2px solid color-mix(in oklab, var(--color-ember) 70%, transparent);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-ember) 35%, transparent);
+    color: var(--color-fg);
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .ember-ring {
+    box-shadow: 0 0 0 1px color-mix(in oklab, var(--color-ember) 35%, transparent),
+      var(--shadow-glow);
+  }
+
+  .story-word {
+    display: inline;
+    transition: color 150ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 150ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .story-word-enter {
+    animation: word-in 400ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes word-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px) scale(0.96);
+      filter: blur(3px);
+      text-shadow: 0 0 12px color-mix(in oklab, var(--color-ember) 50%, transparent);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+      text-shadow: none;
+    }
+  }
+
+  @keyframes flame-flicker {
+    0%,
+    100% {
+      opacity: 0.55;
+      transform: scaleY(1) translateY(0);
+    }
+    40% {
+      opacity: 0.85;
+      transform: scaleY(1.08) translateY(-2px);
+    }
+    70% {
+      opacity: 0.65;
+      transform: scaleY(0.96) translateY(1px);
+    }
+  }
+
+  .flame {
+    animation: flame-flicker 2.4s ease-in-out infinite;
+    transform-origin: center bottom;
+  }
+
+  .flame-delay-1 {
+    animation-delay: 0.3s;
+  }
+
+  .flame-delay-2 {
+    animation-delay: 0.7s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .story-word-enter,
+    .flame,
+    .flame-delay-1,
+    .flame-delay-2 {
+      animation: none !important;
+    }
+
+    body {
+      transition: none;
+    }
+  }
+
+  html.motion-reduce-pref .story-word-enter,
+  html.motion-reduce-pref .flame,
+  html.motion-reduce-pref .flame-delay-1,
+  html.motion-reduce-pref .flame-delay-2 {
+    animation: none !important;
+  }
+
+  html.motion-reduce-pref body {
+    transition: none;
+  }
+}

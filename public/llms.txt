@@ -1,0 +1,30 @@
+# Wordfire
+> Peer-to-peer campfire storytelling. One word at a time.
+
+- Live: https://wordfire.jonbailey.xyz/
+- Source: https://github.com/Pitchfork-and-Torch/wordfire
+- License: MIT
+
+## One-liner
+Friends add one word (or an optional short phrase) to a shared story. Local pass-and-play on one device, or a remote circle over WebRTC data channels.
+
+Version: 2.1.1
+
+## Modes
+- Pass-and-play on one device (offline-capable PWA)
+- Remote circle via room code, link, or QR; the story travels peer-to-peer
+- Optional TURN relay when a direct path cannot form and the host has configured one
+- Optional AI friends on local circles
+- Local archive of finished stories on this device
+
+## Privacy
+Guest-first. No accounts. Finished stories stay in this browser unless you export or share them.
+
+Remote rooms use this site only to introduce peers (roster + WebRTC handshake). Story text then goes peer-to-peer. Peers may learn each other's IP addresses during ICE. An optional relay, when configured, carries the same encrypted data-channel traffic if a direct path fails.
+
+Optional AI friends on a local circle send the story so far to this app (`/api/spark`) so they can take a turn. If a live model is not configured, a local word bank answers.
+
+No analytics or advertising pixels.
+
+## Related
+- https://jonbailey.xyz/
