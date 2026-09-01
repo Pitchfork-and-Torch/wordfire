@@ -22,6 +22,8 @@ jobs:
           NITRO_PRESET: cloudflare_pages
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: npm run build
+      - name: Copy llms.txt into the upload folder
+        run: cp public/llms.txt dist/llms.txt
       - uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
