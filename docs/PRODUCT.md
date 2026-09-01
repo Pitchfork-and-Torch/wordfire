@@ -12,7 +12,7 @@ Wordfire is a digital campfire: friends sit in a circle and build a story **one 
 
 - One contribution at a time (word default; optional short phrase).
 - No ownership fights: co-op trust model, soft tools only.
-- Guest-first, privacy-first: no required accounts, stories stay on-device.
+- Guest-first, privacy-first: no required accounts; finished stories stay in the browser unless you export or share. Optional AI friends send the current story to `/api/spark`.
 - Beauty and reliability are features.
 - Local-first always works; remote upgrades to P2P when friends join.
 
@@ -54,7 +54,7 @@ Wordfire is a digital campfire: friends sit in a circle and build a story **one 
 
 ### 2.1 Through the Wall
 
-Remote circles try a direct WebRTC path first. If a network wall blocks it, a Cloudflare TURN relay keeps the fire lit. Guest-first: no account required. Pass-and-play still works with zero network.
+Remote circles try a direct WebRTC path first. If a network wall blocks it and a TURN relay is configured, that relay can keep the fire lit. Without those secrets, STUN-only. Guest-first: no account required. Pass-and-play still works with zero network.
 
 ### Explicitly deferred (roadmap)
 

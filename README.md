@@ -1,9 +1,11 @@
-# Wordfire · Ember Circle (2.1)
+# Wordfire · Ember Circle (2.1.1)
 
-Pass-and-play and **peer-to-peer** collaborative storytelling. One contribution at a time. Grammar is implied - the story belongs to everyone in the circle.
+**Peer-to-peer campfire storytelling. One word at a time.** Grammar is implied — the story belongs to everyone in the circle.
+
+Local pass-and-play on one device, or a remote circle over WebRTC data channels.
 
 [![Live](https://img.shields.io/badge/live-wordfire.jonbailey.xyz-111111)](https://wordfire.jonbailey.xyz/)
-[![Version](https://img.shields.io/badge/version-2.1.0-1a1a1a)](https://github.com/Pitchfork-and-Torch/wordfire/releases/latest)
+[![Version](https://img.shields.io/badge/version-2.1.1-1a1a1a)](https://github.com/Pitchfork-and-Torch/wordfire/releases/latest)
 
 
 **Live:** https://wordfire.jonbailey.xyz/  
@@ -29,7 +31,7 @@ npm run typecheck
 npm run preview
 ```
 
-Deploy (Knock machine):
+Deploy:
 
 ```powershell
 .\deploy.ps1
@@ -39,7 +41,7 @@ Deploy (Knock machine):
 
 | Path | Purpose |
 |------|---------|
-| `/` | Landing (Ember Circle) |
+| `/` | Landing |
 | `/circle` | Local pass-and-play setup + seeds + rules |
 | `/play` | Local live game |
 | `/done` | Finish / share / export PNG card / stats |
@@ -49,11 +51,13 @@ Deploy (Knock machine):
 | `/how` | How it works |
 | `/settings` | Atmosphere, sound, a11y, rules |
 | `/api/rtc` | WebRTC signaling (edge + Neon) |
+| `/api/ice` | Optional short-lived TURN credentials |
+| `/api/spark` | Optional AI-friend turn (live model or local word bank) |
 
 ## Modes
 
 ### Pass-and-play (default)
-One device, zero network. Offline-capable via PWA. State in `localStorage` (`wordfire-v2`).
+One device, zero network. Offline-capable via PWA. State in `localStorage` (`wordfire-v2`). Optional AI friends can sit in the circle.
 
 ### Remote circle (P2P)
 - Create room → memorable code (`EMBER-A3F2`) + shareable `/room/CODE` link + **QR**
@@ -61,22 +65,29 @@ One device, zero network. Offline-capable via PWA. State in `localStorage` (`wor
 - Story, turn, roster, reactions, thinking indicator over **WebRTC data channels**
 - Mid-story joiners sync full history as **spectators**
 - Host soft-kick; anyone may skip; undo for author or host
-- Cap **12** players (mesh best around 2 - 8)
-- **Deploy note:** remote rooms need Neon `DATABASE_URL` as Pages secret for `/api/rtc`. Local preview uses PGLite. Optional Through-the-wall relay: Pages secrets `TURN_KEY_ID` + `TURN_KEY_API_TOKEN` (Cloudflare Realtime TURN). Without them, STUN-only.
+- Cap **12** players (mesh best around 2–8)
+- **Deploy note:** remote rooms need Neon `DATABASE_URL` as a Pages secret for `/api/rtc`. Local preview uses PGLite. Optional Through-the-wall relay: Pages secrets `TURN_KEY_ID` + `TURN_KEY_API_TOKEN` (Cloudflare Realtime TURN). Without them, STUN-only.
 
 ## Ember Circle highlights
 
 - Optional **story seeds** (fantasy, horror, absurd, …)
+- Optional **AI friends** on local circles (Ember, Puck, Lyra, and others)
 - **No repeated words** rule (optional)
 - **Reactions** on the latest word
 - **Thinking** presence while drafting
 - **Session stats** (parts, voices, duration)
 - **Export PNG** story card
-- Local-first archive; privacy-first (no required accounts)
+- Local-first archive; guest-first (no accounts)
 
 ## Privacy
 
-Guest-first. Stories private on-device unless shared. Peers may learn each other's IPs during ICE (WebRTC). Signaling does not store story text.
+Guest-first. No accounts. Finished stories stay in this browser unless you export or share them.
+
+Remote rooms use this site only to introduce peers (roster + WebRTC handshake). Story text then goes peer-to-peer. Signaling does not store story text. Peers may learn each other's IP addresses during ICE. An optional TURN relay, when configured, carries the same encrypted data-channel traffic if a direct path fails.
+
+Optional AI friends on a local circle send the story so far to `/api/spark` so they can take a turn. If a live model key is not configured, a local word bank answers.
+
+No analytics or advertising pixels.
 
 ## Architecture (pointers)
 
