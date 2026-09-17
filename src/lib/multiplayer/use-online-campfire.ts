@@ -554,12 +554,16 @@ export function useOnlineCampfire(opts: {
       }
 
       if (msg.t === "kick") {
+        // Only the host may kick. Trust the data-channel sender id, not the
+        // self-reported `by` field, so a guest cannot remove other peers.
+        const hostId = stateRef.current.hostId;
+        if (!hostId || from !== hostId || msg.by !== hostId) return;
+        if (msg.playerId === hostId) return;
         if (msg.playerId === selfId) {
           setBeenKicked(true);
         }
         excludedRef.current.add(msg.playerId);
         setState((s) => {
-          if (s.hostId !== msg.by && msg.by !== s.hostId) return s;
           const players = orderPlayers(
             s.players.filter((p) => p.id !== msg.playerId),
             s.hostId,

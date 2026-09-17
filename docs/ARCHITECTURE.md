@@ -77,7 +77,7 @@ seedPrompt?, reactions[{wordId,emoji,by}], thinkingByPeerId
 | `skip` / `undo` / `end_sentence` / `finish` | Turn / story tools |
 | `react` | Soft emoji on a word |
 | `thinking` | Drafting indicator |
-| `kick` | Host removes peer from circle (soft) |
+| `kick` | Host removes peer from circle (soft). Receivers drop it unless the sending peer id is the known `hostId` |
 | `set_host` / `players` | Roster maintenance |
 
 **Invariant:** only game-mutating events bump `seq`. Presence merges never bump seq (prevents turn desync).
