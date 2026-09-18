@@ -351,6 +351,12 @@ export function useOnlineCampfire(opts: {
       }
 
       if (msg.t === "end_sentence") {
+        // End-sentence rewrites the shared word list. Trust the data-channel peer
+        // against the seated roster - otherwise a mid-game spectator (or any forged
+        // peer) can force punctuation while the UI only enables End sentence for
+        // seated players.
+        const seat = stateRef.current.players.find((p) => p.id === from);
+        if (!seat || (seat.role ?? "player") === "spectator") return;
         setState((s) =>
           isStaleGameSeq(msg.seq, s.seq) ? s : { ...s, words: msg.words, seq: msg.seq },
         );
