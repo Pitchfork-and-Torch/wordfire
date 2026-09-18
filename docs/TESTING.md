@@ -69,6 +69,7 @@ node scripts/browser-smoke.mjs http://127.0.0.1:8080/
 
 1. Host removes a guest in lobby or play.  
 2. Guest sees leave / home guidance; remaining peers continue.  
+3. Spoof check: a forged `{ t: "kick", by: hostId }` from a guest must be ignored (channel `from` must equal `by`).  
 
 ## Rules
 

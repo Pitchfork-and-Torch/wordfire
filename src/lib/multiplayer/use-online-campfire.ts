@@ -393,6 +393,9 @@ export function useOnlineCampfire(opts: {
       }
 
       if (msg.t === "kick") {
+        // Soft-kick is host-attributed: trust the data-channel peer id, not msg.by.
+        // Otherwise any guest can forge { t: "kick", by: hostId, playerId: victim }.
+        if (from !== msg.by) return;
         if (msg.playerId === selfId) {
           setBeenKicked(true);
         }
