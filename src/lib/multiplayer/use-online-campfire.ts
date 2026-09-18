@@ -494,12 +494,20 @@ export function useOnlineCampfire(opts: {
       }
 
       if (msg.t === "undo") {
+        // Host or author of the last word may undo. Trust the data-channel
+        // sender id (`from`), not the payload — same pattern as kick.
+        // Apply a local pop so a guest cannot rewrite the whole story via words[].
+        const hostId = stateRef.current.hostId;
         setState((s) => {
           if (msg.seq < s.seq) return s;
+          const last = s.words[s.words.length - 1];
+          if (!last || last.playerId === "seed") return s;
+          if (!hostId || (from !== hostId && last.playerId !== from)) return s;
+          const words = s.words.slice(0, -1);
           const turn = normalizeTurn(s.players, msg.turnPlayerId, msg.turnIndex);
           return {
             ...s,
-            words: msg.words,
+            words,
             turnIndex: turn.turnIndex,
             turnPlayerId: turn.turnPlayerId,
             seq: msg.seq,

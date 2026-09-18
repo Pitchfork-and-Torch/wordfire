@@ -62,6 +62,12 @@ node scripts/browser-smoke.mjs http://127.0.0.1:8080/
 2. On your turn, type slowly: peers show thinking.  
 3. Tap reaction on a word; peers show same emoji chip.  
 
+## Undo authority
+
+1. Author undoes own last word — peers pop that word.
+2. Host undoes another player's last word — peers pop that word.
+3. Non-author undo is ignored: from a guest who did not write the last word, send `{ t: "undo", words: [], turnIndex: 0, turnPlayerId: "x", seq: 999 }` on the reliable channel. Story words unchanged on every peer.
+
 ## Host kick
 
 1. Host removes a guest in lobby or play.  

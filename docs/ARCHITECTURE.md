@@ -74,7 +74,8 @@ seedPrompt?, reactions[{wordId,emoji,by}], thinkingByPeerId
 | `full_state` / `request_state` | Snapshot sync / late join |
 | `start` | Host lights fire with locked seating |
 | `word` | Contribution + next turnPlayerId + seq |
-| `skip` / `undo` / `end_sentence` / `finish` | Turn / story tools |
+| `skip` / `end_sentence` / `finish` | Turn / story tools |
+| `undo` | Host or last-word author. Receivers drop it unless the sending peer is host or author of the popped word; story is popped locally (payload `words` not trusted wholesale) |
 | `react` | Soft emoji on a word |
 | `thinking` | Drafting indicator |
 | `kick` | Host removes peer from circle (soft). Receivers drop it unless the sending peer id is the known `hostId` |
