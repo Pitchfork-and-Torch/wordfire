@@ -314,6 +314,9 @@ export function useOnlineCampfire(opts: {
       }
 
       if (msg.t === "word") {
+        // Contribution is self-only: trust the data-channel peer id, not word.playerId.
+        // Otherwise any guest can forge { t: "word", word: { playerId: victim, ... } }.
+        if (from !== msg.word.playerId) return;
         setState((s) => applyWordMessage(s, msg));
         return;
       }
