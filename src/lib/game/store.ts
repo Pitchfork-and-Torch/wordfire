@@ -78,7 +78,7 @@ interface GameStore extends GameSession {
   addContribution: (raw: string) => { ok: true } | { ok: false; reason: string };
   endSentence: () => void;
   skipTurn: () => void;
-  undoLast: () => void;
+  undoLast: () => boolean;
   resetTurnTimer: () => void;
 
   beginFinish: () => void;
@@ -289,14 +289,17 @@ export const useGameStore = create<GameStore>()(
 
       undoLast: () => {
         const { words, players, turnIndex, phase } = get();
-        if (phase !== "playing" || words.length === 0 || players.length === 0) return;
+        if (phase !== "playing" || words.length === 0 || players.length === 0) return false;
         const prev = words[words.length - 1]!;
+        // Seed prompt tokens are not player turns (remote undo already skips these).
+        if (prev.playerId === "seed") return false;
         const authorIdx = players.findIndex((p) => p.id === prev.playerId);
         set({
           words: words.slice(0, -1),
           turnIndex: authorIdx >= 0 ? authorIdx : (turnIndex - 1 + players.length) % players.length,
           turnStartedAt: Date.now(),
         });
+        return true;
       },
 
       resetTurnTimer: () => set({ turnStartedAt: Date.now() }),

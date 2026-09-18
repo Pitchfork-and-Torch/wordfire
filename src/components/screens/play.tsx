@@ -450,10 +450,14 @@ export function PlayScreen() {
               size="sm"
               onClick={() => {
                 if (words.length === 0) return;
-                undoLast();
+                if (!undoLast()) return;
                 toast.message("Last part undone");
               }}
-              disabled={words.length === 0 || aiThinking}
+              disabled={
+                words.length === 0 ||
+                aiThinking ||
+                words[words.length - 1]?.playerId === "seed"
+              }
               aria-label="Undo last contribution"
             >
               <Undo2 className="size-4" />
