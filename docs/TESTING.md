@@ -90,4 +90,8 @@ node scripts/browser-smoke.mjs http://127.0.0.1:8080/
 ## Signaling failure
 
 1. Block `/api/rtc` in DevTools.  
-2. Remote create fails gracefully; local pass-and-play still works.  
+2. Remote create fails gracefully; local pass-and-play still works.
+
+## Hang-up auth
+
+- Forged `bye` from another peer id: seat stays (data-channel `from` must equal `playerId`).

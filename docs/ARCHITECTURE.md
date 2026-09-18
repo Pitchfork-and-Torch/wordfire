@@ -78,7 +78,7 @@ seedPrompt?, reactions[{wordId,emoji,by}], thinkingByPeerId
 | `react` | Soft emoji on a word |
 | `thinking` | Drafting indicator |
 | `kick` | Host removes peer from circle (soft) |
-| `bye` | Peer hang-up; remaining clients drop the seat immediately |
+| `bye` | Peer hang-up; receivers drop only when data-channel `from` matches `playerId` |
 | `set_host` / `players` | Roster maintenance |
 
 **Invariant:** only game-mutating events bump `seq`. Presence merges never bump seq (prevents turn desync).

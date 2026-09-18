@@ -396,6 +396,9 @@ export function useOnlineCampfire(opts: {
       }
 
       if (msg.t === "bye") {
+        // Hang-up is self-only: trust the data-channel peer id, not msg.playerId.
+        // Otherwise any guest can forge { t: "bye", playerId: victim } and drop seats.
+        if (from !== msg.playerId) return;
         if (msg.playerId === selfId) return;
         departedRef.current.add(msg.playerId);
         setState((s) => applyByeMessage(s, msg));
