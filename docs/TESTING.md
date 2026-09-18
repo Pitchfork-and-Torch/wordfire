@@ -101,6 +101,10 @@ node scripts/browser-smoke.mjs http://127.0.0.1:8080/
 1. Block `/api/rtc` in DevTools.  
 2. Remote create fails gracefully; local pass-and-play still works.
 
+## Hello auth
+
+- Spoof check: a forged `{ t: "hello", player: { id: otherPeerId, name: "Hax", ... } }` from a guest must be ignored (data-channel `from` must equal `player.id`). Otherwise a peer could rename or demote someone still on the live roster.
+
 ## Hang-up auth
 
 - Forged `bye` from another peer id: seat stays (data-channel `from` must equal `playerId`).

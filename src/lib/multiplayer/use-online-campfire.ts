@@ -285,6 +285,11 @@ export function useOnlineCampfire(opts: {
       }
 
       if (msg.t === "hello") {
+        // Hello seats/renames a peer. Trust the data-channel peer id, not
+        // msg.player.id - otherwise any guest can forge
+        // { t: "hello", player: { id: victim, name: "Hax", role: "spectator" } }
+        // and rename or demote someone still on the live roster.
+        if (from !== msg.player.id) return;
         const onRoster = liveRemotePeers().some((p) => p.id === msg.player.id);
         if (onRoster) departedRef.current.delete(msg.player.id);
         else if (msg.player.id !== selfId) departedRef.current.add(msg.player.id);
