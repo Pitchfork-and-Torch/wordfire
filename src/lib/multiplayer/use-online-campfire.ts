@@ -300,6 +300,10 @@ export function useOnlineCampfire(opts: {
       }
 
       if (msg.t === "start") {
+        // Only the room host may light the fire. Trust the data-channel peer id,
+        // not the claimed hostId - otherwise any guest can forge
+        // { t: "start", hostId: self, ... } and force-start.
+        if (from !== stateRef.current.hostId) return;
         setState((s) =>
           ensureStateShape(
             applyStartMessage(s, msg, {

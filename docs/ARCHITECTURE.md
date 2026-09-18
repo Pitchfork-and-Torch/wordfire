@@ -72,7 +72,7 @@ seedPrompt?, reactions[{wordId,emoji,by}], thinkingByPeerId
 |-----|---------|
 | `hello` | Presence + host claim |
 | `full_state` / `request_state` | Snapshot sync / late join |
-| `start` | Host lights fire with locked seating |
+| `start` | Host lights fire with locked seating; receivers apply only when data-channel `from` matches known `hostId` |
 | `word` | Contribution + next turnPlayerId + seq; receivers apply only when data-channel `from` matches `word.playerId` |
 | `skip` / `undo` / `end_sentence` / `finish` | Turn / story tools |
 | `react` | Soft emoji on a word; receivers apply only when data-channel `from` matches `by` |

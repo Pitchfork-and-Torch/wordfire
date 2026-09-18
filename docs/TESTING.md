@@ -71,6 +71,13 @@ node scripts/browser-smoke.mjs http://127.0.0.1:8080/
 2. Guest sees leave / home guidance; remaining peers continue.  
 3. Spoof check: a forged `{ t: "kick", by: hostId }` from a guest must be ignored (channel `from` must equal `by`).  
 
+
+## Start auth
+
+- Spoof check: a forged `{ t: "start", hostId: attackerId, ... }` from a guest must be ignored (data-channel `from` must equal the known room `hostId`).
+- Only the host Light fire control should move the room to `playing`.
+
+
 ## Rules
 
 - Word mode rejects spaces.  
