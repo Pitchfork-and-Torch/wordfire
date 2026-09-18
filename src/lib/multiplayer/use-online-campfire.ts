@@ -377,6 +377,9 @@ export function useOnlineCampfire(opts: {
       }
 
       if (msg.t === "thinking") {
+        // Drafting indicator is self-only: trust the data-channel peer id, not msg.playerId.
+        // Otherwise any guest can forge { t: "thinking", playerId: victim, active: true }.
+        if (from !== msg.playerId) return;
         setState((s) => {
           const set = new Set(s.thinking ?? []);
           if (msg.active) set.add(msg.playerId);

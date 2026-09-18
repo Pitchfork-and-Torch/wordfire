@@ -76,7 +76,7 @@ seedPrompt?, reactions[{wordId,emoji,by}], thinkingByPeerId
 | `word` | Contribution + next turnPlayerId + seq; receivers apply only when data-channel `from` matches `word.playerId` |
 | `skip` / `undo` / `end_sentence` / `finish` | Turn / story tools |
 | `react` | Soft emoji on a word |
-| `thinking` | Drafting indicator |
+| `thinking` | Drafting indicator; receivers apply only when data-channel `from` matches `playerId` |
 | `kick` | Host removes peer from circle (soft) |
 | `bye` | Peer hang-up; receivers drop only when data-channel `from` matches `playerId` |
 | `set_host` / `players` | Roster maintenance |

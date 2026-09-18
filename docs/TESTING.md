@@ -99,3 +99,4 @@ node scripts/browser-smoke.mjs http://127.0.0.1:8080/
 ## Word auth
 
 - Forged `word` with another peer's `word.playerId`: story unchanged (data-channel `from` must equal `word.playerId`).
+- Forged `thinking` with another peer's `playerId`: indicator unchanged (data-channel `from` must equal `playerId`).
