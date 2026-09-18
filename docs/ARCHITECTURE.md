@@ -71,7 +71,7 @@ seedPrompt?, reactions[{wordId,emoji,by}], thinkingByPeerId
 | `t` | Purpose |
 |-----|---------|
 | `hello` | Presence + host claim |
-| `full_state` / `request_state` | Snapshot sync / late join |
+| `full_state` / `request_state` | Snapshot sync / late join (accept `full_state` only from known host, global lowest id, or lowest remote incumbent) |
 | `start` | Host lights fire with locked seating; receivers apply only when data-channel `from` matches known `hostId` |
 | `word` | Contribution + next turnPlayerId + seq; receivers apply only when data-channel `from` matches `word.playerId` |
 | `skip` / `undo` / `end_sentence` / `finish` | Turn / story tools |

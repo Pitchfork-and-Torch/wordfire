@@ -198,6 +198,20 @@ export function useOnlineCampfire(opts: {
       }
 
       if (msg.t === "full_state") {
+        // Snapshot sync is authority-only. Senders are: (1) known room host
+        // (startGame broadcasts full_state), (2) global lowest id among self+peers,
+        // or (3) lowest remote peer (on-connect push excludes the new joiner from
+        // the sender's incumbent set, so a higher-id incumbent may snapshot a
+        // brand-new lowest-id joiner). Otherwise any guest can forge
+        // { t: "full_state", state: { seq: 99999, words: [], phase: "finished" } }
+        // and wipe or rewrite the story.
+        const connectedIds = peersRef.current
+          .filter((p) => p.connectionState === "connected")
+          .map((p) => p.id);
+        const incumbentAuth = [...connectedIds].sort()[0];
+        const globalAuth = [selfId, ...connectedIds].sort()[0];
+        const hostId = stateRef.current.hostId;
+        if (from !== incumbentAuth && from !== globalAuth && from !== hostId) return;
         setState((s) => {
           if (
             s.phase !== "lobby" &&
