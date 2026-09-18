@@ -365,6 +365,9 @@ export function useOnlineCampfire(opts: {
       }
 
       if (msg.t === "react") {
+        // Reactions are self-attributed: trust the data-channel peer id, not msg.by.
+        // Otherwise any guest can forge { t: "react", by: victim, ... } and spoof chips.
+        if (from !== msg.by) return;
         setState((s) => ({
           ...s,
           reactions: mergeReaction(s.reactions ?? [], {

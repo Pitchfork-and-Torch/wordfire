@@ -62,7 +62,8 @@ node scripts/browser-smoke.mjs http://127.0.0.1:8080/
 
 1. While not your turn, confirm draft does not submit.  
 2. On your turn, type slowly: peers show thinking.  
-3. Tap reaction on a word; peers show same emoji chip.  
+3. Tap reaction on a word; peers show same emoji chip.
+   - Spoof check: a forged `{ t: "react", by: otherPeerId }` from a guest must be ignored (channel `from` must equal `by`).  
 
 ## Host kick
 
