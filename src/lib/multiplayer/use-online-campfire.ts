@@ -326,6 +326,11 @@ export function useOnlineCampfire(opts: {
       }
 
       if (msg.t === "skip") {
+        // Skip advances the turn. Trust the data-channel peer against the
+        // seated roster - otherwise a mid-game spectator (or any forged peer)
+        // can force-skip while the UI only enables Skip for seated players.
+        const seat = stateRef.current.players.find((p) => p.id === from);
+        if (!seat || (seat.role ?? "player") === "spectator") return;
         setState((s) => applySkipMessage(s, msg));
         return;
       }
@@ -547,6 +552,8 @@ export function useOnlineCampfire(opts: {
   const skipTurn = useCallback(() => {
     const s = stateRef.current;
     if (s.phase !== "playing" || s.players.length === 0) return;
+    const me = s.players.find((p) => p.id === selfId);
+    if (!me || (me.role ?? "player") === "spectator") return;
     const fromId =
       s.turnPlayerId || s.players[s.turnIndex % s.players.length]?.id;
     if (!fromId) return;
@@ -564,7 +571,7 @@ export function useOnlineCampfire(opts: {
       turnPlayerId: advanced.turnPlayerId,
       seq,
     });
-  }, [sendAll]);
+  }, [selfId, sendAll]);
 
   const undoLast = useCallback(() => {
     const s = stateRef.current;
