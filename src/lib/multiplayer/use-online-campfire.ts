@@ -358,6 +358,11 @@ export function useOnlineCampfire(opts: {
       }
 
       if (msg.t === "finish") {
+        // Finish ends the story for everyone. Trust the data-channel peer against
+        // the seated roster - otherwise a mid-game spectator (or any forged peer)
+        // can force-finish while the UI only enables Finish for seated players.
+        const seat = stateRef.current.players.find((p) => p.id === from);
+        if (!seat || (seat.role ?? "player") === "spectator") return;
         setState((s) =>
           isStaleGameSeq(msg.seq, s.seq)
             ? s
