@@ -240,3 +240,25 @@ html[data-theme="minimal"] {
     transition: none;
   }
 }
+
+
+/* Skip link (a11y) */
+.skip {
+  position: absolute;
+  left: 0.75rem;
+  top: 0.75rem;
+  z-index: 100;
+  padding: 0.5rem 0.75rem;
+  background: #f5f0eb;
+  color: #0c0a09;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-220%);
+}
+.skip:focus {
+  transform: none;
+  outline: 2px solid #e07840;
+  outline-offset: 2px;
+}

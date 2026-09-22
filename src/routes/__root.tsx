@@ -87,8 +87,8 @@ export const Route = createRootRoute({
       },
       { rel: "manifest", href: "/manifest.webmanifest" },
       { rel: "icon", href: "/icons/icon-192.png", type: "image/png" },
-      { rel: "apple-touch-icon", href: "/apple-touch-icon.png?v=2.2.0", sizes: "180x180" },
-      { rel: "apple-touch-icon", href: "/icons/icon-512.png?v=2.2.0", sizes: "512x512" },
+      { rel: "apple-touch-icon", href: `/apple-touch-icon.png?v=${APP_VERSION}`, sizes: "180x180" },
+      { rel: "apple-touch-icon", href: `/icons/icon-512.png?v=${APP_VERSION}`, sizes: "512x512" },
     ],
   }),
   component: RootDocument,
@@ -101,10 +101,15 @@ function RootDocument() {
         <HeadContent />
       </head>
       <body className="min-h-dvh bg-bg text-fg antialiased">
+        <a className="skip" href="#main">
+          Skip to content
+        </a>
         <AuthProvider>
           <AccessibilityShell>
             <AtmosphereShell>
-              <Outlet />
+              <main id="main" tabIndex={-1}>
+                <Outlet />
+              </main>
               <InstallHint />
               <RegisterServiceWorker />
             </AtmosphereShell>

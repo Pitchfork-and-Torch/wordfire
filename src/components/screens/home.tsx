@@ -35,7 +35,7 @@ export function HomeScreen() {
         </Button>
       </header>
 
-      <main className="relative z-10 mx-auto flex w-full max-w-lg flex-1 flex-col justify-end px-5 pb-10 pt-8 sm:justify-center sm:px-6">
+      <div className="relative z-10 mx-auto flex w-full max-w-lg flex-1 flex-col justify-end px-5 pb-10 pt-8 sm:justify-center sm:px-6">
         <div className="mb-8 flex flex-col items-center text-center sm:mb-10">
           <p className="mb-3 text-xs font-medium uppercase tracking-[0.22em] text-ember-glow/90">
             Ember Circle · peer-to-peer · one word at a time
@@ -101,7 +101,7 @@ export function HomeScreen() {
           {APP_VERSION} · guest-first · stories stay in this browser unless you
           share or add an AI friend
         </p>
-      </main>
+      </div>
     </div>
   );
 }
