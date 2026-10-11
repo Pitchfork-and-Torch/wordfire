@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "include": ["/*"],
+  "exclude": [
+    "/VERSION",
+    "/_headers",
+    "/7577922ed4d3ec3df303933b78cbd0ee.txt",
+    "/apple-touch-icon.png",
+    "/llms.txt",
+    "/manifest.webmanifest",
+    "/og.jpg",
+    "/og.png",
+    "/robots.txt",
+    "/share-card.jpg",
+    "/share-card.png",
+    "/sitemap.xml",
+    "/sw.js",
+    "/assets/*",
+    "/icons/*"
+  ]
+}
